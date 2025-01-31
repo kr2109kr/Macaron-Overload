@@ -3,14 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class DoorLoadScene : MonoBehaviour
 {
-    [SerializeField] Object scene;
-
+    [SerializeField] private Object scene;
+    [SerializeField] private string doorCode;
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene(scene.name);
+            if (collision.GetComponent<PlayerCollectItem>().CheckKey(doorCode))
+            {
+                SceneManager.LoadScene(scene.name);
+            }
         }
     }
+
 }

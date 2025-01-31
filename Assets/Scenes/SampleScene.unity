@@ -713,6 +713,10 @@ PrefabInstance:
       propertyPath: scene
       value: 
       objectReference: {fileID: 102900000, guid: ebbd7d1d39d11394a93ad8fb1b3cdddc, type: 3}
+    - target: {fileID: 7027146170749605689, guid: 43f0c68b90d361e4ea67b2da88148064, type: 3}
+      propertyPath: doorCode
+      value: A
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
