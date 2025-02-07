@@ -7,6 +7,7 @@ public class EnemyCollide : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<PlayerHitPoints>().TakeDamage(1);
+            Destroy(gameObject);
         }
     }
 }
