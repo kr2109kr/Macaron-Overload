@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isMoving;
     private bool isFalling;
+    private bool isFacingRight = true;
 
 
     [SerializeField] private float moveSpeed;
@@ -45,7 +46,26 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+
+        if (!isFacingRight && moveInput > 0)
+        {
+            Flip();
+        }
+
+        else if (isFacingRight && moveInput < 0)
+        {
+            Flip();
+        }
+
         Debug.Log(rb2d.linearVelocityY);
         animator.SetInteger("Move", (int)moveInput);
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
     }
 }
