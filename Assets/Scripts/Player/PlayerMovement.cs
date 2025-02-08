@@ -9,10 +9,15 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving;
     private bool isFalling;
     private bool isFacingRight = true;
+    public bool isKnockback;
+    public bool knockFormRight;
 
+    public float MoveInput { get; private set; }
+    private float moveSpeedSave;
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float knockbackForce;
 
     private void Start()
     {
@@ -20,13 +25,14 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetTrigger("jumpTrigger");
 
+        moveSpeedSave = moveSpeed;
     }
 
 
     private void Update()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal");
-        transform.position += new Vector3(moveInput, 0, 0) * moveSpeed * Time.deltaTime;
+        MoveInput = Input.GetAxisRaw("Horizontal");
+        transform.position += new Vector3(MoveInput, 0, 0) * moveSpeed * Time.deltaTime;
 
 
         if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb2d.linearVelocityY) < 0.001f)
@@ -40,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
             isFalling = true;
         }
 
+
         if (isFalling)
         {
             animator.SetTrigger("fallTrigger");
@@ -47,18 +54,38 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (!isFacingRight && moveInput > 0)
+        if (!isFacingRight && MoveInput > 0)
         {
             Flip();
         }
 
-        else if (isFacingRight && moveInput < 0)
+        else if (isFacingRight && MoveInput < 0)
         {
             Flip();
         }
+
+
+        if (isKnockback)
+        {
+            if (knockFormRight)
+            {
+                rb2d.linearVelocity = new Vector2(-knockbackForce * 2, knockbackForce);
+            }
+
+            else
+            {
+                rb2d.linearVelocity = new Vector2(knockbackForce * 2, knockbackForce);
+            }
+
+            moveSpeed = 0;
+            
+            Invoke("CancleKnockback", 0.1f);
+            Invoke("ResetMoveSpeed", 0.5f);
+        }
+
 
         Debug.Log(rb2d.linearVelocityY);
-        animator.SetInteger("Move", (int)moveInput);
+        animator.SetInteger("Move", (int)MoveInput);
     }
 
     private void Flip()
@@ -68,4 +95,15 @@ public class PlayerMovement : MonoBehaviour
         localScale.x *= -1f;
         transform.localScale = localScale;
     }
+
+    private void CancleKnockback()
+    {
+        isKnockback = false;
+    }
+
+    private void ResetMoveSpeed()
+    {
+        moveSpeed = moveSpeedSave;
+    }
+
 }

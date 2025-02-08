@@ -18,5 +18,10 @@ public class PlayerHitPoints : MonoBehaviour
     {
         images[hitPoints - 1].gameObject.SetActive(false);
         hitPoints -= damage;
+
+        if (hitPoints <= 0)
+        {
+            GameManager.gameManager.GameOver();
+        }
     }
 }

@@ -6,8 +6,20 @@ public class EnemyCollide : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            if (collision.transform.position .x <= transform.position.x)
+            {
+                collision.GetComponent<PlayerMovement>().knockFormRight = true;
+            }
+
+
+            else if (collision.transform.position.x >= transform.position.x)
+            {
+                collision.GetComponent<PlayerMovement>().knockFormRight = false;
+            }
+
+            collision.GetComponent<PlayerMovement>().isKnockback = true;
+
             collision.GetComponent<PlayerHitPoints>().TakeDamage(1);
-            Destroy(gameObject);
         }
     }
 }
