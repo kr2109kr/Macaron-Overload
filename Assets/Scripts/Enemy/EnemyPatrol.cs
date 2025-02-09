@@ -14,7 +14,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (!moveToPointA)
         {
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, waypoint_A.position, 0.01f * moveSpeed);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, waypoint_A.position, moveSpeed * Time.deltaTime);
 
             if (transform.localPosition == waypoint_A.position)
             {
@@ -28,7 +28,7 @@ public class EnemyPatrol : MonoBehaviour
 
         else if (!moveToPointB)
         {
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, waypoint_B.position, 0.01f * moveSpeed);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, waypoint_B.position, moveSpeed * Time.deltaTime);
 
             if (transform.localPosition == waypoint_B.position)
             {

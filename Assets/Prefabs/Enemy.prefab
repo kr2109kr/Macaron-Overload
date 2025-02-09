@@ -277,4 +277,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoint_A: {fileID: 0}
   waypoint_B: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: 4.5
