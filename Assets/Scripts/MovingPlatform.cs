@@ -13,7 +13,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (!moveToPointA)
         {
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, waypoint_A.localPosition, 0.01f * moveSpeed);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, waypoint_A.localPosition, moveSpeed * Time.deltaTime);
 
             if (transform.localPosition == waypoint_A.localPosition)
             {
@@ -25,7 +25,7 @@ public class MovingPlatform : MonoBehaviour
 
         else if (!moveToPointB)
         {
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, waypoint_B.localPosition, 0.01f * moveSpeed);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, waypoint_B.localPosition, moveSpeed * Time.deltaTime);
 
             if (transform.localPosition == waypoint_B.localPosition)
             {

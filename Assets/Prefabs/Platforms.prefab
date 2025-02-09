@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoint_A: {fileID: 4300410911612789504}
   waypoint_B: {fileID: 3421001235298569331}
-  moveSpeed: 1
+  moveSpeed: 4.5
 --- !u!61 &5397229157206547429
 BoxCollider2D:
   m_ObjectHideFlags: 0
